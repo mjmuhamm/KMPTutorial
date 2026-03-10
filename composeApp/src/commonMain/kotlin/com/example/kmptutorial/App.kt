@@ -1,7 +1,6 @@
 package com.example.kmptutorial
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,17 +20,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.kmptutorial.db.ToDoDB
 import com.example.kmptutorial.network.ToDoViewModel
 import com.example.kmptutorial.network.TodoScreenState
 import com.example.kmptutorial.network.toDoModelFactory
-import org.jetbrains.compose.resources.painterResource
-
-import kmptutorial.composeapp.generated.resources.Res
-import kmptutorial.composeapp.generated.resources.compose_multiplatform
 
 @Composable
-@Preview
-fun App() {
+
+fun App(toDoDB: ToDoDB) {
     MaterialTheme {
         var showContent by remember { mutableStateOf(true) }
         val todoViewModel = viewModel<ToDoViewModel>(factory = toDoModelFactory)
@@ -50,6 +46,7 @@ fun App() {
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
+//                    Text(getPlatformName())
                     Button(onClick = {todoViewModel.loadTodos()}) {
                         Text("Click Me")
                     }

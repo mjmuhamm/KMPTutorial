@@ -40,8 +40,6 @@ class ToDoViewModel : ViewModel() {
                 is Response.Success<*> -> {
                     _state.update {
                         TodoScreenState.Success(response.result as List<ToDoDTO>)
-
-
                     }
                 }
             }

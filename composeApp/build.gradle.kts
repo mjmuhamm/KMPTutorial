@@ -8,6 +8,12 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
     kotlin("plugin.serialization") version "2.3.10"
+
+    //Room
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.androidx.room)
+
+
 }
 
 kotlin {
@@ -55,6 +61,10 @@ kotlin {
             //Ktor
             implementation(libs.ktor.client.core)
 
+            //Room
+            implementation(libs.androidx.room.runtime)
+            implementation(libs.androidx.sqlite.bundled)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -99,6 +109,11 @@ android {
 
 dependencies {
     debugImplementation(libs.compose.uiTooling)
+    //Room
+    add("kspAndroid", libs.androidx.room.compiler)
+    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
+    add("kspJvm", libs.androidx.room.compiler)
+    add("kspIosArm64", libs.androidx.room.compiler)
 }
 
 compose.desktop {
@@ -111,4 +126,10 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
+    //Room
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
 }
+
+
